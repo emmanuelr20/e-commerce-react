@@ -1,38 +1,85 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
   color: white;
+  padding: 10px;
 }
 
-.App-link {
-  color: #61dafb;
+.App-header h3 {
+  font-size: 32px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.App-body {
+  max-width: 800px;
+  margin: auto;
+  padding: 15px;
+  background-color: #f7f7f7;
+  min-height: calc(100vh - 90px);
+}
+
+.title {
+  font-size: 25px;
+  margin-bottom: 10px;
+}
+
+label {
+  display: block;
+}
+
+input {
+  width: 100%;
+  border-radius: 5px;
+  border: #cccccc 1px solid;
+  margin: 10px 0;
+  padding: 10px;
+}
+
+button {
+  color: #f7f7f7;
+  background-color: #282c34;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  font-weight: 500;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.product-card {
+  padding: 10px;
+  background-color: #ffffff;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 1px 4px -1px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  line-height: 1.5;
+}
+
+.product-card button {
+  padding: 5px 10px;
+  font-size: 12px;
+  float: right;
+}
+
+.menu a,
+.menu span {
+  color: aliceblue;
+  padding: 10px;
+  text-decoration: none;
+  text-transform: capitalize;
+  cursor: pointer;
+}
+
+.menu a:hover,
+.menu span:hover {
+  color: aqua;
 }
