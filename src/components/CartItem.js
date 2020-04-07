@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import withContext from "../withContext";
 
-const Product = props => {
-  const { product } = props;
+const CartItem = props => {
+  const { cartItem, cartKey } = props;
+  const { product, amount } = cartItem;
   return (
     <div className=" column is-half">
       <div className="box">
@@ -21,23 +22,13 @@ const Product = props => {
               <span className="tag is-primary">${product.price}</span>
             </b>
             <div>{product.shortDesc}</div>
-            <small>
-              {product.stock ? product.stock + " available" : "Out Of Stock"}
-            </small>
-            <div className="is-clearfix">
-              <button
-                className="button is-small is-outlined is-primary   is-pulled-right"
-                onClick={() =>
-                  props.context.addToCart({
-                    id: product.name,
-                    product,
-                    amount: 1
-                  })
-                }
-              >
-                Add to Cart
-              </button>
-            </div>
+            <small>{`${amount} in cart`}</small>
+          </div>
+          <div
+            className="media-right"
+            onClick={() => props.context.removeFromCart(cartKey)}
+          >
+            <span className="delete is-large"></span>
           </div>
         </div>
       </div>
@@ -45,4 +36,4 @@ const Product = props => {
   );
 };
 
-export default withContext(Product);
+export default withContext(CartItem);

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import withContext from "../withContext";
 import { Redirect } from "react-router-dom";
 
@@ -26,21 +26,48 @@ class Login extends Component {
 
   render() {
     return !this.props.context.user ? (
-      <div className="login">
-        <h4 className="title">Login</h4>
-        <div className="form-field">
-          <label>User Name: </label>
-          <input type="text" name="username" onChange={this.handleChange} />
+      <Fragment>
+        <div className="hero is-primary ">
+          <div className="hero-body container">
+            <h4 className="title">Login</h4>
+          </div>
         </div>
-        <div className="form-field">
-          <label>Password: </label>
-          <input type="password" name="password" onChange={this.handleChange} />
+        <br />
+        <br />
+        <div className="columns is-mobile is-centered">
+          <div className="column is-one-third">
+            <div className="field">
+              <label className="label">User Name: </label>
+              <input
+                className="input"
+                type="text"
+                name="username"
+                onChange={this.handleChange}
+              />
+            </div>
+            <div className="field">
+              <label className="label">Password: </label>
+              <input
+                className="input"
+                type="password"
+                name="password"
+                onChange={this.handleChange}
+              />
+            </div>
+            {this.state.error && (
+              <div className="error">{this.state.error}</div>
+            )}
+            <div className="field is-clearfix">
+              <button
+                className="button is-primary is-outlined is-pulled-right"
+                onClick={this.login}
+              >
+                Submit
+              </button>
+            </div>
+          </div>
         </div>
-        {this.state.error && <div className="error">{this.state.error}</div>}
-        <div className="form-field">
-          <button onClick={this.login}>Submit</button>
-        </div>
-      </div>
+      </Fragment>
     ) : (
       <Redirect to="/products" />
     );

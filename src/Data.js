@@ -8,7 +8,7 @@ export default {
       name: "shoes",
       stock: 10,
       price: 399.99,
-      shortDesc: "Pellentesque commodo eros a enim",
+      shortDesc: "Nulla facilisi. Curabitur at lacus ac velit ornare lobortis.",
       description:
         "Cras sagittis. Praesent nec nisl a purus blandit viverra. Ut leo. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Fusce a quam."
     },
@@ -16,7 +16,7 @@ export default {
       name: "bags",
       stock: 20,
       price: 299.99,
-      shortDesc: "Pellentesque commodo eros a enim",
+      shortDesc: "Nulla facilisi. Curabitur at lacus ac velit ornare lobortis.",
       description:
         "Cras sagittis. Praesent nec nisl a purus blandit viverra. Ut leo. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Fusce a quam."
     },
@@ -24,7 +24,7 @@ export default {
       name: "shirts",
       stock: 15,
       price: 149.99,
-      shortDesc: "Pellentesque commodo eros a enim",
+      shortDesc: "Nulla facilisi. Curabitur at lacus ac velit ornare lobortis.",
       description:
         "Cras sagittis. Praesent nec nisl a purus blandit viverra. Ut leo. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Fusce a quam."
     },
@@ -32,7 +32,7 @@ export default {
       name: "shorts",
       stock: 5,
       price: 109.99,
-      shortDesc: "Pellentesque commodo eros a enim",
+      shortDesc: "Nulla facilisi. Curabitur at lacus ac velit ornare lobortis.",
       description:
         "Cras sagittis. Praesent nec nisl a purus blandit viverra. Ut leo. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Fusce a quam."
     }

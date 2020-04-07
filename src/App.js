@@ -27,7 +27,8 @@ export default class App extends Component {
     return false;
   };
 
-  logout = () => {
+  logout = e => {
+    e.preventDefault();
     this.setState({ user: null });
     localStorage.removeItem("user");
   };
@@ -87,32 +88,45 @@ export default class App extends Component {
       >
         <Router>
           <div className="App">
-            <header className="App-header">
-              <div>
-                <h3>E-Commerce</h3>
+            <nav
+              className="navbar container"
+              role="navigation"
+              aria-label="main navigation"
+            >
+              <div className="navbar-brand">
+                <b className="navbar-item is-size-4 ">E-Commerce</b>
               </div>
-              <div className="menu">
-                <Link to="/products">products</Link>
+              <div className="navbar-menu">
+                <Link to="/products" className="navbar-item">
+                  Products
+                </Link>
                 {this.state.user && this.state.user.accessLevel < 1 && (
-                  <Link to="/add-product">Add Product</Link>
+                  <Link to="/add-product" className="navbar-item">
+                    Add Product
+                  </Link>
                 )}
-                <Link to="/cart">Cart</Link>
+                <Link to="/cart" className="navbar-item">
+                  Cart
+                </Link>
                 {!this.state.user ? (
-                  <Link to="/login">Login</Link>
+                  <Link to="/login" className="navbar-item">
+                    Login
+                  </Link>
                 ) : (
-                  <span onClick={this.logout}>Logout</span>
+                  <a className="navbar-item" onClick={this.logout}>
+                    Logout
+                  </a>
                 )}
               </div>
-            </header>
-            <div className="App-body">
-              <Switch>
-                <Route exact path="/" component={ProductList} />
-                <Route exact path="/login" component={Login} />
-                <Route exact path="/cart" component={Cart} />
-                <Route exact path="/add-product" component={AddProduct} />
-                <Route exact path="/products" component={ProductList} />
-              </Switch>
-            </div>
+            </nav>
+
+            <Switch>
+              <Route exact path="/" component={ProductList} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/cart" component={Cart} />
+              <Route exact path="/add-product" component={AddProduct} />
+              <Route exact path="/products" component={ProductList} />
+            </Switch>
           </div>
         </Router>
       </Context.Provider>

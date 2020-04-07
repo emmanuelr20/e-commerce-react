@@ -1,42 +1,47 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import withContext from "../withContext";
+import CartItem from "./CartItem";
 
-class Cart extends Component {
-  checkout = () => {};
-
-  render() {
-    const { cart } = this.props.context;
-    const cartKeys = Object.keys(cart || {});
-    return (
-      <div className="cart">
-        <h4 className="title">Cart</h4>
-        {cartKeys.length ? (
-          cartKeys.map(key => (
-            <div className="product-card" key={key}>
-              <h4>
-                {cart[key].product.name} ${cart[key].product.price} (
-                {cart[key].amount})
-              </h4>
-              <small>{cart[key].product.shortDesc}</small>
-              <button onClick={() => this.props.context.removeFromCart(key)}>
-                remove Cart
-              </button>
-            </div>
-          ))
-        ) : (
-          <div className="empty">No item in cart!</div>
-        )}
-
-        <button
-          style={{ background: "darkred", marginRight: "10px" }}
-          onClick={this.props.context.clearCart}
-        >
-          Clear cart
-        </button>
-        <button onClick={this.checkout}>Checkout</button>
+const Cart = props => {
+  const { cart } = props.context;
+  const cartKeys = Object.keys(cart || {});
+  return (
+    <Fragment>
+      <div className="hero is-primary">
+        <div className="hero-body container">
+          <h4 className="title">My Cart</h4>
+        </div>
       </div>
-    );
-  }
-}
+      <br />
+      <div className="container">
+        {cartKeys.length ? (
+          <div className="columns is-multiline">
+            {cartKeys.map(key => (
+              <CartItem cartKey={key} key={key} cartItem={cart[key]} />
+            ))}
+            <div className="column is-12 is-clearfix">
+              <br />
+              <div className="is-pulled-right">
+                <button
+                  onClick={props.context.clearCart}
+                  className="button is-warning "
+                >
+                  Clear cart
+                </button>{" "}
+                <button className="button is-success" onClick={() => null}>
+                  Checkout
+                </button>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="column">
+            <div className="title has-text-grey-light">No item in cart!</div>
+          </div>
+        )}
+      </div>
+    </Fragment>
+  );
+};
 
 export default withContext(Cart);

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import withContext from "../withContext";
 
 const initState = {
@@ -40,64 +40,87 @@ class AddProduct extends Component {
   render() {
     const { name, price, stock, shortDesc, description } = this.state;
     return (
-      <div className="add-product">
-        <h4 className="title">Add Product</h4>
-        <form>
-          <div className="form-field">
-            <label>Product Name: </label>
-            <input
-              type="text"
-              name="name"
-              value={name}
-              onChange={this.handleChange}
-              required
-            />
+      <Fragment>
+        <div className="hero is-primary ">
+          <div className="hero-body container">
+            <h4 className="title">Login</h4>
           </div>
-          <div className="form-field">
-            <label>Price: </label>
-            <input
-              type="number"
-              name="price"
-              value={price}
-              onChange={this.handleChange}
-              required
-            />
-          </div>
-          <div className="form-field">
-            <label>Available in Stock: </label>
-            <input
-              type="number"
-              name="stock"
-              value={stock}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div className="form-field">
-            <label>Short Description: </label>
-            <input
-              type="text"
-              name="shortDesc"
-              value={shortDesc}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div className="form-field">
-            <label>Description: </label>
-            <input
-              type="text"
-              name="description"
-              value={description}
-              onChange={this.handleChange}
-            />
-          </div>
-          {this.state.error && <div className="error">{this.state.error}</div>}
-          <div className="form-field">
-            <button type="submit" onClick={this.save}>
-              Submit
-            </button>
+        </div>
+        <br />
+        <br />
+        <form onSubmit={this.save}>
+          <div className="columns is-mobile is-centered">
+            <div className="column is-one-third">
+              <div className="field">
+                <label className="label">Product Name: </label>
+                <input
+                  className="input"
+                  type="text"
+                  name="name"
+                  value={name}
+                  onChange={this.handleChange}
+                  required
+                />
+              </div>
+              <div className="field">
+                <label className="label">Price: </label>
+                <input
+                  className="input"
+                  type="number"
+                  name="price"
+                  value={price}
+                  onChange={this.handleChange}
+                  required
+                />
+              </div>
+              <div className="field">
+                <label className="label">Available in Stock: </label>
+                <input
+                  className="input"
+                  type="number"
+                  name="stock"
+                  value={stock}
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div className="field">
+                <label className="label">Short Description: </label>
+                <input
+                  className="input"
+                  type="text"
+                  name="shortDesc"
+                  value={shortDesc}
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div className="field">
+                <label className="label">Description: </label>
+                <textarea
+                  className="textarea"
+                  type="text"
+                  rows="2"
+                  style={{ resize: "none" }}
+                  name="description"
+                  value={description}
+                  onChange={this.handleChange}
+                />
+              </div>
+              {this.state.error && (
+                <div className="error">{this.state.error}</div>
+              )}
+              <div className="field is-clearfix">
+                <button
+                  className="button is-primary is-outlined is-pulled-right"
+                  type="submit"
+                  onClick={this.save}
+                >
+                  Submit
+                </button>
+              </div>
+            </div>
           </div>
         </form>
-      </div>
+      </Fragment>
     );
   }
 }
