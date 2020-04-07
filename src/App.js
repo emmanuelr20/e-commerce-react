@@ -32,11 +32,11 @@ export default class App extends Component {
     localStorage.removeItem("user");
   };
 
-  addProduct = product => {
+  addProduct = (product, callback) => {
     let products = this.state.products;
     products.push(product);
     localStorage.setItem("products", JSON.stringify(products));
-    this.setState({ products });
+    this.setState({ products }, () => callback && callback());
   };
 
   addToCart = cartItem => {
@@ -53,6 +53,12 @@ export default class App extends Component {
   removeFromCart = cartItemId => {
     let cart = this.state.cart;
     delete cart[cartItemId];
+    localStorage.setItem("cart", JSON.stringify(cart));
+    this.setState({ cart });
+  };
+
+  clearCart = () => {
+    let cart = {};
     localStorage.setItem("cart", JSON.stringify(cart));
     this.setState({ cart });
   };
@@ -75,7 +81,8 @@ export default class App extends Component {
           removeFromCart: this.removeFromCart,
           addToCart: this.addToCart,
           login: this.login,
-          addProduct: this.addProduct
+          addProduct: this.addProduct,
+          clearCart: this.clearCart
         }}
       >
         <Router>

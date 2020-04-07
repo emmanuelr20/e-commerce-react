@@ -9,10 +9,13 @@ class ProductList extends Component {
       <div className="products-wrapper">
         <h4 className="title">Our Products</h4>
         <div className="product-list">
-          {products &&
+          {products && products.length ? (
             products.map((product, index) => (
               <Product product={product} key={index} />
-            ))}
+            ))
+          ) : (
+            <div className="empty">No product found!</div>
+          )}
         </div>
       </div>
     );

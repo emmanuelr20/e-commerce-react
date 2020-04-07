@@ -21,7 +21,7 @@
 .App-body {
   max-width: 800px;
   margin: auto;
-  padding: 15px;
+  padding: 30px;
   background-color: #f7f7f7;
   min-height: calc(100vh - 90px);
 }
@@ -82,4 +82,17 @@ button {
 .menu a:hover,
 .menu span:hover {
   color: aqua;
+}
+
+.error {
+  color: red;
+  margin: 5px 0;
+  font-weight: 500;
+}
+
+.empty {
+  color: #aaaaaa;
+  font-weight: 500;
+  font-size: 25px;
+  margin-bottom: 20px;
 }
