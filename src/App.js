@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import "./App.css";
 import { Switch, Route, Link, BrowserRouter as Router } from "react-router-dom";
 import Login from "./components/Login";
 import ProductList from "./components/ProductList";
@@ -16,6 +15,8 @@ export default class App extends Component {
       cart: {},
       products: []
     };
+
+    this.routerRef = React.createRef();
   }
   login = (usn, pwd) => {
     let user = data.users.find(u => u.username === usn && u.password === pwd);
@@ -34,7 +35,7 @@ export default class App extends Component {
   };
 
   addProduct = (product, callback) => {
-    let products = this.state.products;
+    let products = this.state.products.slice();
     products.push(product);
     localStorage.setItem("products", JSON.stringify(products));
     this.setState({ products }, () => callback && callback());
@@ -47,8 +48,27 @@ export default class App extends Component {
     } else {
       cart[cartItem.id] = cartItem;
     }
+    if (cart[cartItem.id].amount > cart[cartItem.id].product.stock) {
+      cart[cartItem.id].amount = cart[cartItem.id].product.stock;
+    }
     localStorage.setItem("cart", JSON.stringify(cart));
     this.setState({ cart });
+  };
+
+  checkout = () => {
+    if (!this.state.user) {
+      this.routerRef.current.history.push("/login");
+      return;
+    }
+    const cart = this.state.cart;
+    const products = this.state.products.map(p => {
+      if (cart[p.name]) {
+        p.stock = p.stock - cart[p.name].amount;
+      }
+      return p;
+    });
+    this.setState({ products });
+    this.clearCart();
   };
 
   removeFromCart = cartItemId => {
@@ -83,10 +103,11 @@ export default class App extends Component {
           addToCart: this.addToCart,
           login: this.login,
           addProduct: this.addProduct,
-          clearCart: this.clearCart
+          clearCart: this.clearCart,
+          checkout: this.checkout
         }}
       >
-        <Router>
+        <Router ref={this.routerRef}>
           <div className="App">
             <nav
               className="navbar container"
@@ -95,8 +116,29 @@ export default class App extends Component {
             >
               <div className="navbar-brand">
                 <b className="navbar-item is-size-4 ">E-Commerce</b>
+
+                <a
+                  href="/"
+                  role="button"
+                  className="navbar-burger burger"
+                  aria-label="menu"
+                  aria-expanded="false"
+                  data-target="navbarBasicExample"
+                  onClick={e => {
+                    e.preventDefault();
+                    this.setState({ showMenu: !this.state.showMenu });
+                  }}
+                >
+                  <span aria-hidden="true"></span>
+                  <span aria-hidden="true"></span>
+                  <span aria-hidden="true"></span>
+                </a>
               </div>
-              <div className="navbar-menu">
+              <div
+                className={`navbar-menu ${
+                  this.state.showMenu ? "is-active" : ""
+                }`}
+              >
                 <Link to="/products" className="navbar-item">
                   Products
                 </Link>
@@ -107,13 +149,19 @@ export default class App extends Component {
                 )}
                 <Link to="/cart" className="navbar-item">
                   Cart
+                  <span
+                    className="tag is-primary"
+                    style={{ marginLeft: "5px" }}
+                  >
+                    {Object.keys(this.state.cart).length}
+                  </span>
                 </Link>
                 {!this.state.user ? (
                   <Link to="/login" className="navbar-item">
                     Login
                   </Link>
                 ) : (
-                  <a className="navbar-item" onClick={this.logout}>
+                  <a href="/" className="navbar-item" onClick={this.logout}>
                     Logout
                   </a>
                 )}

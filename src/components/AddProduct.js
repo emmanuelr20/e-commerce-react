@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import withContext from "../withContext";
+import { Redirect } from "react-router-dom";
 
 const initState = {
   name: "",
@@ -39,7 +40,10 @@ class AddProduct extends Component {
 
   render() {
     const { name, price, stock, shortDesc, description } = this.state;
-    return (
+    const { user } = this.props.context;
+    return !(user && user.accessLevel < 1) ? (
+      <Redirect to="/" />
+    ) : (
       <Fragment>
         <div className="hero is-primary ">
           <div className="hero-body container">

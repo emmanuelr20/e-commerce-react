@@ -55,7 +55,7 @@ class Login extends Component {
               />
             </div>
             {this.state.error && (
-              <div className="error">{this.state.error}</div>
+              <div className="has-text-danger">{this.state.error}</div>
             )}
             <div className="field is-clearfix">
               <button

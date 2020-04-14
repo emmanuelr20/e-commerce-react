@@ -1,5 +1,4 @@
-import React, { Component } from "react";
-import withContext from "../withContext";
+import React from "react";
 
 const CartItem = props => {
   const { cartItem, cartKey } = props;
@@ -12,7 +11,7 @@ const CartItem = props => {
             <figure className="image is-64x64">
               <img
                 src="https://bulma.io/images/placeholders/128x128.png"
-                alt="Image"
+                alt="product"
               />
             </figure>
           </div>
@@ -26,7 +25,7 @@ const CartItem = props => {
           </div>
           <div
             className="media-right"
-            onClick={() => props.context.removeFromCart(cartKey)}
+            onClick={() => props.removeFromCart(cartKey)}
           >
             <span className="delete is-large"></span>
           </div>
@@ -36,4 +35,4 @@ const CartItem = props => {
   );
 };
 
-export default withContext(CartItem);
+export default CartItem;

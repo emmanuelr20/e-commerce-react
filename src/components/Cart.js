@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Fragment } from "react";
 import withContext from "../withContext";
 import CartItem from "./CartItem";
 
@@ -15,9 +15,14 @@ const Cart = props => {
       <br />
       <div className="container">
         {cartKeys.length ? (
-          <div className="columns is-multiline">
+          <div className="column columns is-multiline">
             {cartKeys.map(key => (
-              <CartItem cartKey={key} key={key} cartItem={cart[key]} />
+              <CartItem
+                cartKey={key}
+                key={key}
+                cartItem={cart[key]}
+                removeFromCart={props.context.removeFromCart}
+              />
             ))}
             <div className="column is-12 is-clearfix">
               <br />
@@ -28,7 +33,10 @@ const Cart = props => {
                 >
                   Clear cart
                 </button>{" "}
-                <button className="button is-success" onClick={() => null}>
+                <button
+                  className="button is-success"
+                  onClick={props.context.checkout}
+                >
                   Checkout
                 </button>
               </div>

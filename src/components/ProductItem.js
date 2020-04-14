@@ -1,7 +1,6 @@
-import React, { Component } from "react";
-import withContext from "../withContext";
+import React from "react";
 
-const Product = props => {
+const ProductItem = props => {
   const { product } = props;
   return (
     <div className=" column is-half">
@@ -11,7 +10,7 @@ const Product = props => {
             <figure className="image is-64x64">
               <img
                 src="https://bulma.io/images/placeholders/128x128.png"
-                alt="Image"
+                alt="product"
               />
             </figure>
           </div>
@@ -21,14 +20,17 @@ const Product = props => {
               <span className="tag is-primary">${product.price}</span>
             </b>
             <div>{product.shortDesc}</div>
-            <small>
-              {product.stock ? product.stock + " available" : "Out Of Stock"}
-            </small>
+
+            {product.stock > 0 ? (
+              <small>{product.stock + " Available"}</small>
+            ) : (
+              <small className="has-text-danger">Out Of Stock</small>
+            )}
             <div className="is-clearfix">
               <button
                 className="button is-small is-outlined is-primary   is-pulled-right"
                 onClick={() =>
-                  props.context.addToCart({
+                  props.addToCart({
                     id: product.name,
                     product,
                     amount: 1
@@ -45,4 +47,4 @@ const Product = props => {
   );
 };
 
-export default withContext(Product);
+export default ProductItem;
